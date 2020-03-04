@@ -22,7 +22,7 @@ public class TravProf {
         updateMedCondInfo(newMedCondInfo);
     }
     // get methods
-        public String gettravAgentID() {
+    public String gettravAgentID() {
         return travAgentID;
     }
     public String getFirstName() {
