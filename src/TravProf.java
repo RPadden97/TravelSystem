@@ -11,7 +11,15 @@ public class TravProf {
     private MedCond medCondInfo;
     // constructor method
     public TravProf(String newTravAgentID, String newFirstName, String newLastName, String newAddress, String newPhone, float newTripCost, String newTravelType, String newPaymentType, MedCond newMedCondInfo) {
-
+        travAgentID = newTravAgentID;
+        updateFirstName(newFirstName);
+        updateLastName(newLastName);
+        updateAddress(newAddress);
+        updatePhone(newPhone);
+        updateTripCost(newTripCost);
+        updateTravelType(newTravelType);
+        updatePaymentType(newPaymentType);
+        updateMedCondInfo(newMedCondInfo);
     }
     // get methods
         public String gettravAgentID() {
