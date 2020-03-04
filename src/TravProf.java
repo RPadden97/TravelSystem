@@ -71,7 +71,7 @@ public class TravProf {
     public void updatePaymentType(String newPaymentType) {
         paymentType = newPaymentType;
     }
-    public void updateMedCondInfo(String newMedCondInfo) {
+    public void updateMedCondInfo(MedCond newMedCondInfo) {
         medCondInfo = newMedCondInfo;
     }
 }
