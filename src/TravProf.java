@@ -22,7 +22,7 @@ public class TravProf {
         updateMedCondInfo(newMedCondInfo);
     }
     // get methods
-        public String gettravAgentID() {
+    public String gettravAgentID() {
         return travAgentID;
     }
     public String getFirstName() {
@@ -71,7 +71,7 @@ public class TravProf {
     public void updatePaymentType(String newPaymentType) {
         paymentType = newPaymentType;
     }
-    public void updateMedCondInfo(String newMedCondInfo) {
+    public void updateMedCondInfo(MedCond newMedCondInfo) {
         medCondInfo = newMedCondInfo;
     }
 }
