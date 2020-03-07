@@ -9,7 +9,7 @@ public class TravProf {
     private String travelType;
     private String paymentType;
     private MedCond medCondInfo;
-    // constructor method 
+    // constructor method
     public TravProf(String newTravAgentID, String newFirstName, String newLastName, String newAddress, String newPhone, float newTripCost, String newTravelType, String newPaymentType, MedCond newMedCondInfo) {
         travAgentID = newTravAgentID;
         updateFirstName(newFirstName);
