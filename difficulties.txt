@@ -1,1 +1,2 @@
-GITHUB WAS A BITCH :)
+Github was difficult to set up with IntelliJ, using the Github desktop solved this issue
+IntelliJ's project structure repeatedly changed on Ava's laptop, creating errors
