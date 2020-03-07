@@ -1,6 +1,5 @@
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 public class TravProfDB {
     private int numTravelers;
@@ -31,11 +30,13 @@ public class TravProfDB {
     public TravProf findNextProfile() {
         return travelerList.get(currentTravelerIndex+1); //returns traveler index + 1
     }
-    public void writeAllTravProf(String TravProf) implements Serializable {
+    public void writeAllTravProf(String TravProf) {
+        String filepath = "TravProfDatabase.txt";
         try {
             FileOutputStream fileOut = new FileOutputStream(filepath);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut
+            objectOut.writeObject(TravProf);
+            objectOut.close();
         }
 
     { //writes to a file
