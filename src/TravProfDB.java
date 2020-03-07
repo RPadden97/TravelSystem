@@ -1,14 +1,15 @@
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 public class TravProfDB {
     private int numTravelers;
     private int currentTravelerIndex;
     private String fileName;
     private ArrayList<TravProf> travelerList;
-    //public TravProfDB(String fileName) {
-    //
-   // }
+
+    public TravProfDB(String newFileName) {
+        fileName = newFileName + ".txt";
+    }
+
     public void insertNewProfile(TravProf TravProf) {
         travelerList.add(TravProf);
     }
@@ -25,24 +26,38 @@ public class TravProfDB {
         return null; //returns null if both do not match
     }
     public TravProf findFirstProfile() {
-        travelerList.get(0);
+        return travelerList.get(0);
     }
     public TravProf findNextProfile() {
         return travelerList.get(currentTravelerIndex+1); //returns traveler index + 1
     }
-    public void writeAllTravProf(String TravProf) {
-        String filepath = "TravProfDatabase.txt";
+    public void writeAllTravProf(String fileNameDB) {
+
+        String filePath = "./database/" + fileNameDB + ".ser";
+
         try {
-            FileOutputStream fileOut = new FileOutputStream(filepath);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(TravProf);
-            objectOut.close();
+            FileOutputStream fileOut = new FileOutputStream(filePath);
+            ObjectOutputStream writeData = new ObjectOutputStream(fileOut);
+            writeData.writeObject(travelerList);
+            writeData.flush();
+            writeData.close();
+            System.out.println("Good Job!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //writes to a file
+    }
+    public void initializeDataBase(String fileNameDB) { //returns information from the file
+        String filePath = "./database/" + fileNameDB + ".ser";
+        try{
+            FileInputStream readData = new FileInputStream(filePath);
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+
+            ArrayList<TravProf> travelerList = (ArrayList<TravProf>) readStream.readObject();
+            readStream.close();
+        }catch (Exception e) {
+            e.printStackTrace();
         }
 
-    { //writes to a file
     }
-    public void initializeDataBase(String TravProf) { //returns information from the file
-    }
-    }
-
 }
