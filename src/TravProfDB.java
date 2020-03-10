@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
+
 public class TravProfDB {
+
     private int numTravelers;
     private int currentTravelerIndex;
     private String fileName;
