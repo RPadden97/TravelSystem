@@ -11,13 +11,16 @@ public class TravProfDB {
     public TravProfDB(String newFileName) throws IOException {
         fileName = newFileName;
         initializeDataBase(fileName);
+        currentTravelerIndex=0;
     }
 
     public void insertNewProfile(TravProf TravProf) {
         travelerList.add(TravProf);
+        numTravelers++;
     }
 
     public boolean deleteProfile(String travAgentID, String lastName) {
+        numTravelers--;
         return travelerList.remove(findProfile(travAgentID, lastName)); //send back true if it was successful, false if not
     }
 
@@ -32,11 +35,16 @@ public class TravProfDB {
     }
 
     public TravProf findFirstProfile() {
-        return travelerList.get(0);
+        currentTravelerIndex = 0;
+        return travelerList.get(currentTravelerIndex);
     }
 
     public TravProf findNextProfile() {
-        return travelerList.get(currentTravelerIndex+1); //returns traveler index + 1
+        currentTravelerIndex++;
+        if(travelerList.size()>currentTravelerIndex){
+            return travelerList.get(currentTravelerIndex); //returns traveler index + 1
+        }
+        else{ return null;}
     }
 
     public void writeAllTravProf(String fileNameDB) {
@@ -53,6 +61,8 @@ public class TravProfDB {
             e.printStackTrace();
         }
         //writes to a file
+
+        numTravelers=travelerList.size();
     }
 
     public void initializeDataBase(String fileNameDB) throws IOException { //returns information from the file
@@ -75,6 +85,8 @@ public class TravProfDB {
                 e.printStackTrace();
             }
         }
+
+        numTravelers=travelerList.size();
 
     }
 }
