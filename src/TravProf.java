@@ -1,4 +1,6 @@
-public class TravProf {
+import java.io.Serializable;
+
+public class TravProf implements Serializable {
     // defining variables
     private String travAgentID;
     private String firstName;
