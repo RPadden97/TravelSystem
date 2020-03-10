@@ -56,7 +56,6 @@ public class TravProfDB {
             writeData.writeObject(travelerList);
             writeData.flush();
             writeData.close();
-            System.out.println("Good Job!");
         } catch (IOException e) {
             e.printStackTrace();
         }

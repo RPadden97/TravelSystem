@@ -8,6 +8,7 @@ public class TravProfInterface {
     private Scanner keyboard;
     private TravProfDB database;
     private String databaseName;
+    private TravProf currentProfile = null;
 
     public TravProfInterface(String fileName) throws IOException {
         keyboard = new Scanner(System.in);
@@ -16,22 +17,26 @@ public class TravProfInterface {
     }
 
     public void getUserChoice() throws IOException {
-        int menuChoice;
-        System.out.println("Menu: ");
-        System.out.println("\t1. Enter a New Travel Profile\n\t2. Delete a Traveler by Name and Agent ID\n\t3. Find and display a Profile\n\t4. Travel Profile Modifications\n\t5. Display All Profiles\n\t6. Write to database\n\t7. Intialize Database");
-        System.out.print("Select an option (1-7): ");
-        menuChoice = keyboard.nextInt();
+        boolean exit = false;
+        while(!exit){
+            System.out.println("Menu: ");
+            System.out.println("\t1. Enter a New Travel Profile\n\t2. Delete a Traveler by Name and Agent ID\n\t3. Find and display a Profile\n\t4. Travel Profile Modifications\n\t5. Display All Profiles\n\t6. Write to database\n\t7. Intialize Database\n\t8. Exit");
+            System.out.print("Select an option (1-7): ");
+            int menuChoice = keyboard.nextInt();
 
-        switch( menuChoice ){
-            case 1: createNewTravProf(); break;
-            case 2: deleteTravProf(); break;
-            case 3: findTravProf(); break;
-            case 4: updateTravProf(); break;
-            case 5: displayAllTravProf(); break;
-            case 6: writeToDB(); break;
-            case 7: initDB(); break;
+            switch( menuChoice ){
+                case 1: createNewTravProf(); break;
+                case 2: deleteTravProf(); break;
+                case 3: findTravProf(); break;
+                case 4: updateTravProf(); break;
+                case 5: displayAllTravProf(); break;
+                case 6: writeToDB(); break;
+                case 7: initDB(); break;
+                case 8: exit = true; break;
+            }
+
+            System.out.println();
         }
-
     }
 
     public void deleteTravProf(){
@@ -58,7 +63,54 @@ public class TravProfInterface {
     }
 
     public void updateTravProf(){
+        if(currentProfile!=null){
+            System.out.println("Choose an element to modify: ");
+            System.out.println("\t1. Address\n\t2. Phone\n\t3. Travel Type\n\t4. Trip Cost\n\t5. Payment Type\n\t6. MD Contact\n\t7. MD Phone Number\n\t8. Illness Type\n\t9. Allergy Type");
+            System.out.print("Select an option (1-9): ");
+            int menuChoice = keyboard.nextInt();
 
+            switch( menuChoice ){
+                case 1:
+                    System.out.print("Enter new address: ");
+                    currentProfile.updateAddress(keyboard.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Enter new phone number: ");
+                    currentProfile.updatePhone(keyboard.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Enter new travel type: ");
+                    currentProfile.updateTravelType(keyboard.nextLine());
+                    break;
+                case 4:
+                    System.out.print("Enter new trip cost: ");
+                    currentProfile.updateTripCost(keyboard.nextFloat());
+                    break;
+                case 5:
+                    System.out.print("Enter new payment type: ");
+                    currentProfile.updatePaymentType(keyboard.nextLine());
+                    break;
+                case 6:
+                    System.out.print("Enter new MD Contact: ");
+                    currentProfile.getMedCondInfo().updateMdContact(keyboard.nextLine());
+                    break;
+                case 7:
+                    System.out.print("Enter new MD phone: ");
+                    currentProfile.getMedCondInfo().updateMdPhone(keyboard.nextLine());
+                    break;
+                case 8:
+                    System.out.print("Enter new illness type: ");
+                    currentProfile.getMedCondInfo().updateIllType(keyboard.nextLine());
+                    break;
+                case 9:
+                    System.out.print("Enter new allergy type: ");
+                    currentProfile.getMedCondInfo().updateAlgType(keyboard.nextLine());
+                    break;
+            }
+        }else{
+            System.out.println("Find profile first");
+        }
+        System.out.println();
     }
 
     public void displayTravProf(TravProf profile){
@@ -99,58 +151,48 @@ public class TravProfInterface {
         database = new TravProfDB(databaseName);
     }
 
-    public TravProf createNewTravProf(){
-        System.out.print("Enter agent ID: ");
+    public TravProf createNewTravProf() {
+        keyboard.nextLine();
+
+        System.out.print("\tEnter agent ID: ");
         String agentID = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter first name: ");
+        System.out.print("\tEnter first name: ");
         String firstName = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter last name: ");
+        System.out.print("\tEnter last name: ");
         String lastName = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter address: ");
+        System.out.print("\tEnter address: ");
         String address = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter phone number: ");
+        System.out.print("\tEnter phone number: ");
         String phoneNumber = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter trip cost: ");
+        System.out.print("\tEnter trip cost: ");
         float tripCost = keyboard.nextFloat();
-        System.out.println();
 
-        System.out.print("Enter travel type: ");
+        System.out.print("\tEnter travel type: ");
         String travelType = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter payment type: ");
+        System.out.print("\tEnter payment type: ");
         String paymentType = keyboard.nextLine();
-        System.out.println();
 
         return new TravProf(agentID,firstName,lastName,address,phoneNumber,tripCost,travelType,paymentType,createNewMedCond());
     }
 
     public MedCond createNewMedCond(){
-        System.out.print("Enter Doctor contact: ");
+        System.out.print("\tEnter Doctor contact: ");
         String contact = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter Doctor's phone number: ");
+        System.out.print("\tEnter Doctor's phone number: ");
         String phoneNumber = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter allergy type: ");
+        System.out.print("\tEnter allergy type: ");
         String algType = keyboard.nextLine();
-        System.out.println();
 
-        System.out.print("Enter illness type: ");
+        System.out.print("\tEnter illness type: ");
         String illType = keyboard.nextLine();
-        System.out.println();
 
         return new MedCond(contact, phoneNumber, algType, illType);
     }
