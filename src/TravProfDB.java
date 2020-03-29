@@ -8,19 +8,19 @@ public class TravProfDB {
     private String fileName;
     private ArrayList<TravProf> travelerList;
 
-    public TravProfDB(String newFileName) throws IOException {
+    public TravProfDB(String newFileName) throws IOException { //create database
         fileName = newFileName;
         initializeDataBase(fileName);
         currentTravelerIndex=0;
     }
 
-    public void insertNewProfile(TravProf TravProf) {
+    public void insertNewProfile(TravProf TravProf) { //create new profile
         travelerList.add(TravProf);
-        numTravelers++;
+        numTravelers++; //increase number of travelers by one with each new profile
     }
 
-    public boolean deleteProfile(String travAgentID, String lastName) {
-        numTravelers--;
+    public boolean deleteProfile(String travAgentID, String lastName) { //remove previously existing profile
+        numTravelers--; //decrease number of travelers by one with each previously existing profile removed
         return travelerList.remove(findProfile(travAgentID, lastName)); //send back true if it was successful, false if not
     }
 
@@ -35,12 +35,12 @@ public class TravProfDB {
     }
 
     public TravProf findFirstProfile() {
-        currentTravelerIndex = 0;
-        return travelerList.get(currentTravelerIndex);
+        currentTravelerIndex = 0; // first profile will have an index of 0
+        return travelerList.get(currentTravelerIndex); // return first profile
     }
 
     public TravProf findNextProfile() {
-        currentTravelerIndex++;
+        currentTravelerIndex++; //iterate to new profile
         if(travelerList.size()>currentTravelerIndex){
             return travelerList.get(currentTravelerIndex); //returns traveler index + 1
         }
