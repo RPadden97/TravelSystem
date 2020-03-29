@@ -22,7 +22,7 @@ public class TravProfInterface {
             System.out.println("Menu: ");
             System.out.println("\t1. Enter a New Travel Profile\n\t2. Delete a Traveler by Name and Agent ID\n\t3. Find and display a Profile\n\t4. Travel Profile Modifications\n\t5. Display All Profiles\n\t6. Write to database\n\t7. Intialize Database\n\t8. Exit");
             System.out.print("Select an option (1-7): ");
-            int menuChoice = keyboard.nextInt();
+            int menuChoice = Integer.parseInt(keyboard.nextLine());
 
             switch( menuChoice ){
                 case 1: if(checkDatabaseLoaded())database.insertNewProfile(createNewTravProf()); break;
@@ -41,33 +41,41 @@ public class TravProfInterface {
 
     public void deleteTravProf(){
         System.out.println("\nDelete a Traveler by Name and Agent ID:");
-        System.out.print("\tEnter traveler's last name: ");
-        String lastName = keyboard.nextLine();
-        System.out.println();
         System.out.print("\tEnter travel agent ID: ");
         String agentID = keyboard.nextLine();
+        System.out.print("\tEnter traveler's last name: ");
+        String lastName = keyboard.nextLine();
+
         System.out.println();
 
-        database.deleteProfile(agentID,lastName);
+        if(database.deleteProfile(agentID,lastName)){
+            System.out.println("Successfully Deleted.");
+        }else{
+            System.out.println("Delete Failed");
+        }
     }
 
     public void findTravProf(){
         System.out.println("\nFind and Display a Traveler by Name and Agent ID:");
-        System.out.print("\tEnter traveler's last name: ");
-        String lastName = keyboard.nextLine();
-        System.out.println();
         System.out.print("\tEnter travel agent ID: ");
         String agentID = keyboard.nextLine();
-        System.out.println();
+        System.out.print("\tEnter traveler's last name: ");
+        String lastName = keyboard.nextLine();
         displayTravProf(database.findProfile(agentID,lastName));
     }
 
     public void updateTravProf(){
+        System.out.print("\tEnter travel agent ID: ");
+        String agentID = keyboard.nextLine();
+        System.out.print("\tEnter traveler's last name: ");
+        String lastName = keyboard.nextLine();
+        currentProfile = database.findProfile(agentID,lastName);
+
         if(currentProfile!=null){
             System.out.println("Choose an element to modify: ");
             System.out.println("\t1. Address\n\t2. Phone\n\t3. Travel Type\n\t4. Trip Cost\n\t5. Payment Type\n\t6. MD Contact\n\t7. MD Phone Number\n\t8. Illness Type\n\t9. Allergy Type");
             System.out.print("Select an option (1-9): ");
-            int menuChoice = keyboard.nextInt();
+            int menuChoice = Integer.parseInt(keyboard.nextLine());
 
             switch( menuChoice ){
                 case 1:
@@ -108,13 +116,13 @@ public class TravProfInterface {
                     break;
             }
         }else{
-            System.out.println("Find profile first");
+            System.out.println("Add a profile first");
         }
-        System.out.println();
+        System.out.println("Update: Success");
     }
 
     public void displayTravProf(TravProf profile){
-        System.out.println("Profile of " + profile.getLastName());
+        System.out.println("Profile of " + profile.getFirstName() + " " + profile.getLastName());
         System.out.println("\tAgent ID: " + profile.gettravAgentID());
         System.out.println("\tName: " + profile.getFirstName() + " " + profile.getLastName());
         System.out.println("\tAddress: " + profile.getAddress());
@@ -152,8 +160,6 @@ public class TravProfInterface {
     }
 
     public TravProf createNewTravProf() {
-        keyboard.nextLine();
-
         System.out.print("\tEnter agent ID: ");
         String agentID = keyboard.nextLine();
 
