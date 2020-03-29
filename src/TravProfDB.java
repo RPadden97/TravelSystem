@@ -73,7 +73,7 @@ public class TravProfDB {
             travelerList = new ArrayList<TravProf>();
             writeAllTravProf(fileNameDB);
         } else {
-            System.out.println("File already exists.");
+            System.out.println("\nFile already exists.\nLoading now...");
             try{
                 FileInputStream readData = new FileInputStream(filePath);
                 ObjectInputStream readStream = new ObjectInputStream(readData);

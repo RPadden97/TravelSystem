@@ -25,12 +25,12 @@ public class TravProfInterface {
             int menuChoice = keyboard.nextInt();
 
             switch( menuChoice ){
-                case 1: createNewTravProf(); break;
-                case 2: deleteTravProf(); break;
-                case 3: findTravProf(); break;
-                case 4: updateTravProf(); break;
-                case 5: displayAllTravProf(); break;
-                case 6: writeToDB(); break;
+                case 1: if(checkDatabaseLoaded())database.insertNewProfile(createNewTravProf()); break;
+                case 2: if(checkDatabaseLoaded())deleteTravProf(); break;
+                case 3: if(checkDatabaseLoaded())findTravProf(); break;
+                case 4: if(checkDatabaseLoaded())updateTravProf(); break;
+                case 5: if(checkDatabaseLoaded())displayAllTravProf(); break;
+                case 6: if(checkDatabaseLoaded())writeToDB(); break;
                 case 7: initDB(); break;
                 case 8: exit = true; break;
             }
@@ -130,16 +130,15 @@ public class TravProfInterface {
     }
 
     public void displayAllTravProf(){
-        //TODO: FIX THIS TO ONLY SHOW WHAT MATCHES A TRAVEL AGENT ID
         System.out.print("\tEnter travel agent ID: ");
         String agentID = keyboard.nextLine();
         System.out.println();
 
         TravProf temp = database.findFirstProfile();
-        displayTravProf(temp);
-        temp = database.findNextProfile();
         while(temp!=null){
-            displayTravProf(temp);
+            if(temp.gettravAgentID().equals(agentID)){
+                displayTravProf(temp);
+            }
             temp = database.findNextProfile();
         }
     }
@@ -171,7 +170,7 @@ public class TravProfInterface {
         String phoneNumber = keyboard.nextLine();
 
         System.out.print("\tEnter trip cost: ");
-        float tripCost = keyboard.nextFloat();
+        float tripCost = Float.parseFloat(keyboard.nextLine());
 
         System.out.print("\tEnter travel type: ");
         String travelType = keyboard.nextLine();
@@ -196,5 +195,12 @@ public class TravProfInterface {
         String illType = keyboard.nextLine();
 
         return new MedCond(contact, phoneNumber, algType, illType);
+    }
+
+    public boolean checkDatabaseLoaded(){
+        if(database == null){
+            System.out.println("\nERROR: Database needs to be initialized first");
+        }
+        return database != null;
     }
 }
