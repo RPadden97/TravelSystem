@@ -16,15 +16,15 @@ public class TravProfInterface {
         getUserChoice();
     }
 
-    public void getUserChoice() throws IOException {
+    public void getUserChoice() throws IOException { //prompts the user and directs the program to the next step
         boolean exit = false;
         while(!exit){
             System.out.println("Menu: ");
             System.out.println("\t1. Enter a New Travel Profile\n\t2. Delete a Traveler by Name and Agent ID\n\t3. Find and display a Profile\n\t4. Travel Profile Modifications\n\t5. Display All Profiles\n\t6. Write to database\n\t7. Intialize Database\n\t8. Exit");
-            System.out.print("Select an option (1-7): ");
-            int menuChoice = Integer.parseInt(keyboard.nextLine());
+            System.out.print("Select an option (1-8): ");
+            int menuChoice = Integer.parseInt(keyboard.nextLine()); //get user input
 
-            switch( menuChoice ){
+            switch( menuChoice ){ //all current options
                 case 1: if(checkDatabaseLoaded())database.insertNewProfile(createNewTravProf()); break;
                 case 2: if(checkDatabaseLoaded())deleteTravProf(); break;
                 case 3: if(checkDatabaseLoaded())findTravProf(); break;
@@ -33,13 +33,14 @@ public class TravProfInterface {
                 case 6: if(checkDatabaseLoaded())writeToDB(); break;
                 case 7: initDB(); break;
                 case 8: exit = true; break;
+                default: System.out.println("Invalid selection, try again."); break; //Invalid choice was made
             }
 
             System.out.println();
         }
     }
 
-    public void deleteTravProf(){
+    public void deleteTravProf(){ //delete the profile indicated
         System.out.println("\nDelete a Traveler by Name and Agent ID:");
         System.out.print("\tEnter travel agent ID: ");
         String agentID = keyboard.nextLine();
@@ -55,7 +56,7 @@ public class TravProfInterface {
         }
     }
 
-    public void findTravProf(){
+    public void findTravProf(){ //using travel agent ID and name of traveler, find their profile
         System.out.println("\nFind and Display a Traveler by Name and Agent ID:");
         System.out.print("\tEnter travel agent ID: ");
         String agentID = keyboard.nextLine();
@@ -64,7 +65,7 @@ public class TravProfInterface {
         displayTravProf(database.findProfile(agentID,lastName));
     }
 
-    public void updateTravProf(){
+    public void updateTravProf(){ //modify profile
         System.out.print("\tEnter travel agent ID: ");
         String agentID = keyboard.nextLine();
         System.out.print("\tEnter traveler's last name: ");
@@ -77,7 +78,7 @@ public class TravProfInterface {
             System.out.print("Select an option (1-9): ");
             int menuChoice = Integer.parseInt(keyboard.nextLine());
 
-            switch( menuChoice ){
+            switch( menuChoice ){ //options for modification
                 case 1:
                     System.out.print("Enter new address: ");
                     currentProfile.updateAddress(keyboard.nextLine());
@@ -121,7 +122,7 @@ public class TravProfInterface {
         System.out.println("Update: Success");
     }
 
-    public void displayTravProf(TravProf profile){
+    public void displayTravProf(TravProf profile){ //display the contents of a profile
         System.out.println("Profile of " + profile.getFirstName() + " " + profile.getLastName());
         System.out.println("\tAgent ID: " + profile.gettravAgentID());
         System.out.println("\tName: " + profile.getFirstName() + " " + profile.getLastName());
@@ -137,7 +138,7 @@ public class TravProfInterface {
         System.out.println("\t\tIllness Type: " + profile.getMedCondInfo().getIllType());
     }
 
-    public void displayAllTravProf(){
+    public void displayAllTravProf(){ //display all profiles based on a Travel Agent ID
         System.out.print("\tEnter travel agent ID: ");
         String agentID = keyboard.nextLine();
         System.out.println();
@@ -151,15 +152,17 @@ public class TravProfInterface {
         }
     }
 
+    //save the current profiles to the database
     public void writeToDB(){
         database.writeAllTravProf(databaseName);
     }
 
-    public void initDB() throws IOException {
+    public void initDB() throws IOException { //initialize the database
         database = new TravProfDB(databaseName);
     }
 
-    public TravProf createNewTravProf() {
+    public TravProf createNewTravProf() { //Create a new profile
+        //Asks the user to fill in all the fields of the profile
         System.out.print("\tEnter agent ID: ");
         String agentID = keyboard.nextLine();
 
@@ -187,7 +190,8 @@ public class TravProfInterface {
         return new TravProf(agentID,firstName,lastName,address,phoneNumber,tripCost,travelType,paymentType,createNewMedCond());
     }
 
-    public MedCond createNewMedCond(){
+    public MedCond createNewMedCond(){ //create a new Medical condition profile
+        //Asks the user to fill in all the fields
         System.out.print("\tEnter Doctor contact: ");
         String contact = keyboard.nextLine();
 
@@ -203,7 +207,7 @@ public class TravProfInterface {
         return new MedCond(contact, phoneNumber, algType, illType);
     }
 
-    public boolean checkDatabaseLoaded(){
+    public boolean checkDatabaseLoaded(){ //Check if the database has been loaded yet, inform user appropriately
         if(database == null){
             System.out.println("\nERROR: Database needs to be initialized first");
         }

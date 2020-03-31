@@ -67,7 +67,7 @@ public class TravProfDB {
     public void initializeDataBase(String fileNameDB) throws IOException { //returns information from the file
         String filePath = "./database/" + fileNameDB + ".ser";
         File myObj = new File(filePath);
-
+        //Determines if a database needs to be created or loaded
         if (myObj.createNewFile()) {
             System.out.println("File created: " + myObj.getName());
             travelerList = new ArrayList<TravProf>();
