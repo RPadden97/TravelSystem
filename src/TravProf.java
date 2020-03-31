@@ -24,56 +24,56 @@ public class TravProf implements Serializable {
         updateMedCondInfo(newMedCondInfo);
     }
     // get methods
-    public String gettravAgentID() {
+    public String gettravAgentID() { //get and return travAgentID
         return travAgentID;
     }
-    public String getFirstName() {
+    public String getFirstName() { //get and return firstName
         return firstName;
     }
-    public String getLastName() {
+    public String getLastName() { //get and return lastName
         return lastName;
     }
-    public String getAddress() {
+    public String getAddress() { //get and return address
         return address;
     }
-    public String getPhone() {
+    public String getPhone() { //get and return phone number
         return phone;
     }
-    public float getTripCost() {
+    public float getTripCost() { //get and return tripCost
         return tripCost;
     }
-    public String getTravelType() {
+    public String getTravelType() { //get and return travelType
         return travelType;
     }
-    public String getPaymentType() {
+    public String getPaymentType() { //get and return paymentType
         return paymentType;
     }
-    public MedCond getMedCondInfo() {
+    public MedCond getMedCondInfo() { //get and return MedCondInfo
         return medCondInfo;
     }
     //update methods
-    public void updateFirstName(String newFirst) {
+    public void updateFirstName(String newFirst) { //update first name
         firstName = newFirst;
     }
-    public void updateLastName(String newLast) {
+    public void updateLastName(String newLast) { //update last name
         lastName = newLast;
     }
-    public void updateAddress(String newAddress) {
+    public void updateAddress(String newAddress) { //update address
         address = newAddress;
     }
-    public void updatePhone(String newPhone) {
+    public void updatePhone(String newPhone) { //update phone number
         phone = newPhone;
     }
-    public void updateTripCost(float newTripCost) {
+    public void updateTripCost(float newTripCost) { //update tripCost
         tripCost = newTripCost;
     }
-    public void updateTravelType(String newTravelType) {
+    public void updateTravelType(String newTravelType) { //update travelType
         travelType = newTravelType;
     }
-    public void updatePaymentType(String newPaymentType) {
+    public void updatePaymentType(String newPaymentType) { //update paymentType
         paymentType = newPaymentType;
     }
-    public void updateMedCondInfo(MedCond newMedCondInfo) {
+    public void updateMedCondInfo(MedCond newMedCondInfo) { //update medCondInfo
         medCondInfo = newMedCondInfo;
     }
 }
