@@ -1,10 +1,9 @@
 import javax.swing.*;
+
 public class MainMenuGUI {
     private JFrame mainFrame;
     private JLabel lb1;
-    private JPanel panel;
     private JButton btn;
-    private JTextField textField1, textField2;
     private JRadioButton jradio_btn1, jradio_btn2, jradio_btn3, jradio_btn4, jradio_btn5;
     //create a constructor
     public MainMenuGUI(){
@@ -15,7 +14,7 @@ public class MainMenuGUI {
         mainFrame.setSize(400,400);
         mainFrame.setLayout(null);
         lb1 = new JLabel("Integrated Travel System");
-        lb1.setBounds(10, 10, 150, 20);
+        lb1.setBounds(120, 50, 150, 20);
         jradio_btn1 = new JRadioButton();
         jradio_btn1.setText("Create Profile");
         jradio_btn1.setBounds(100, 90, 120, 20);
@@ -31,6 +30,9 @@ public class MainMenuGUI {
         jradio_btn5 = new JRadioButton();
         jradio_btn5.setText("Display All Profiles");
         jradio_btn5.setBounds(100, 210, 150, 20);
+        btn = new JButton("Select");
+        btn.setBounds(120, 250, 100, 20);
+        mainFrame.add(btn);
         mainFrame.add(lb1);
         mainFrame.add(jradio_btn1);
         mainFrame.add(jradio_btn2);
@@ -40,6 +42,6 @@ public class MainMenuGUI {
         mainFrame.setVisible(true);
     }
     public static void main(String[] args){
-        MainMenuGUI swingtest = new MainMenuGUI();
+        MainMenuGUI mainMenuGUI = new MainMenuGUI();
     }
 }
