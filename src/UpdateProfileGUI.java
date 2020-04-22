@@ -4,9 +4,9 @@ import java.awt.event.ActionListener;
 
 public class UpdateProfileGUI {
     private JFrame mainFrame, secondFrame;
-    private JLabel lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9;
+    private JLabel lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10;
     private JButton btn, btn2;
-    private JTextField textField1, textField2;
+    private JTextField textField1, textField2, textField3;
     private JComboBox jComboBox;
 
     public UpdateProfileGUI() {
@@ -67,7 +67,16 @@ public class UpdateProfileGUI {
                 lb9 = new JLabel(str_input2);
                 lb9.setBounds(180, 130, 150, 20);
                 secondFrame.add(lb9);
-                chosen = 
+                String chosen = (String) jComboBox.getSelectedItem();
+                lb10 = new JLabel(chosen + ": ");
+                lb10.setBounds(100, 160, 150, 20);
+                secondFrame.add(lb10);
+                textField3 = new JTextField();
+                textField3.setBounds(200, 160, 150, 20);
+                secondFrame.add(textField3);
+                btn2 = new JButton("Submit");
+                btn2.setBounds(120, 210, 100, 20);
+                secondFrame.add(btn2);
             }
         });
     };
