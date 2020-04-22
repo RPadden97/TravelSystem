@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 public class UpdateProfileGUI {
     private JFrame mainFrame, secondFrame;
-    private JLabel lb1, lb2, lb3, lb4, lb5;
+    private JLabel lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9;
     private JButton btn, btn2;
     private JTextField textField1, textField2;
     private JComboBox jComboBox;
@@ -42,11 +42,32 @@ public class UpdateProfileGUI {
         jComboBox.setBounds(180, 160, 100, 20);
         mainFrame.add(jComboBox);
         mainFrame.setVisible(true);
+        secondFrame = new JFrame("Update");
+        secondFrame.setSize(400,400);
+        secondFrame.setLayout(null);
+        lb5 = new JLabel("Traveler ID: ");
+        lb6 = new JLabel("Last Name: ");
+        lb5.setBounds(100, 100, 150, 20);
+        lb6.setBounds(100, 130, 150, 20);
+        secondFrame.add(lb5);
+        secondFrame.add(lb6);
+        lb7 = new JLabel("Update");
+        lb7.setBounds(120, 60, 100, 20);
+        secondFrame.add(lb7);
 
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 secondFrame.setVisible(true);
+                String str_input1 = textField1.getText();
+                lb8 = new JLabel(str_input1);
+                lb8.setBounds(180, 100, 150, 20);
+                secondFrame.add(lb8);
+                String str_input2 = textField2.getText();
+                lb9 = new JLabel(str_input2);
+                lb9.setBounds(180, 130, 150, 20);
+                secondFrame.add(lb9);
+                chosen = 
             }
         });
     };
