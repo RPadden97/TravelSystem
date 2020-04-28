@@ -182,47 +182,45 @@ public class CreateProfileGUI {
                 String input_LastName = tf_LastName.getText();
                 String input_Address = tf_Address.getText();
                 String input_Phone = tf_Phone.getText();
-                String input_TripCost = tf_TripCost.getText();
+                Float input_TripCost = Float.parseFloat(tf_TripCost.getText());
                 String input_MDContact = tf_MDContact.getText();
                 String input_MDPhone = tf_MDPhone.getText();
 
 
                 String input_TravelType;
                 switch(cb_TravelType.getSelectedIndex()){
-                    case 0: input_TravelType = "Pleasure";
-                            break;
                     case 1: input_TravelType = "Business";
+                            break;
+                    default: input_TravelType = "Pleasure";
                             break;
                 }
 
                 String input_PaymentType;
                 switch(cb_PaymentType.getSelectedIndex()){
-                    case 0: input_PaymentType = "Credit";
-                            break;
                     case 1: input_PaymentType = "Check";
                             break;
                     case 2: input_PaymentType = "Debit";
                             break;
                     case 3: input_PaymentType = "Invoice";
                             break;
+                    default: input_PaymentType = "Credit";
+                            break;
                 }
 
                 String input_AlgType;
                 switch(cb_PaymentType.getSelectedIndex()){
-                    case 0: input_AlgType = "None";
-                            break;
                     case 1: input_AlgType = "Food";
                             break;
                     case 2: input_AlgType = "Medication";
                             break;
                     case 3: input_AlgType = "Other";
                             break;
+                    default: input_AlgType= "None";
+                            break;
                 }
 
                 String input_IllType;
                 switch(cb_PaymentType.getSelectedIndex()){
-                    case 0: input_IllType = "None";
-                            break;
                     case 1: input_IllType = "Heart";
                             break;
                     case 2: input_IllType = "Diabetes";
@@ -231,7 +229,11 @@ public class CreateProfileGUI {
                             break;
                     case 4: input_IllType = "Other";
                             break;
+                    default: input_IllType = "None";
+                            break;
                 }
+
+                TravProf newTP = new TravProf(input_TravelID,input_FirstName,input_LastName,input_Address,input_Phone,input_TripCost,input_TravelType,input_PaymentType,new MedCond(input_MDContact,input_MDPhone,input_AlgType,input_IllType));
 
             }
         });
